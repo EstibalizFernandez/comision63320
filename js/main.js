@@ -97,6 +97,7 @@ function calcularNumeroMagico(numero) {
     return suma; 
 }
 
+// **ENTREGA 2 ** Buscamos afines con los métodos find, filter y map
 function filtrarAfines (nombreSigno){
     const signoEncontrado = detalleDeLosSignos.find(signo => signo.nombre === nombreSigno);
     const numeroSuerte = signoEncontrado.numeroSuerte;
@@ -120,9 +121,8 @@ function calcularSignoYMostrar() {
         const numeroMagico = calcularNumeroMagico(numeroDeLaSuerte); // Ahora pasamos el resultado
         console.log(`Tu signo del zodiaco es ${signo} y tu número mágico es ${numeroMagico}`);
         alert(`Tu signo del zodiaco es ${signo} y tu número mágico es ${numeroMagico}`);
-        // Buscamos los afines
+        // **ENTREGA 2 ** Buscamos los afines
         const afines = prompt("¿quieres saber con qué signos tienes más afinidad?");
-
         if (afines.toLowerCase() === "si" || afines.toLowerCase() === "sí") {
           alert(filtrarAfines(signo));
         } else if (afines.toLocaleLowerCase() === "no" ) {
