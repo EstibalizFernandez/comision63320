@@ -3,17 +3,20 @@
 // const mes = prompt("Introduce tu mes de nacimiento (MM):");
 // const anio = prompt("Introduce tu año de nacimiento (AAAA):");
 
-const mostrarInfo = document.getElementById('mostrarInfo');
-const tuNum = document.getElementById('tuNum');
-const tuSigno = document.getElementById('tuSigno');
-const afines = document.getElementById('afines');
-
+// Variables de DOM
+const mostrarInfoDOM = document.getElementById('mostrarInfoDOM');
+const tuNumDOM = document.getElementById('tuNumDOM');
+const tuSignoDOM = document.getElementById('tuSignoDOM');
+const mostrarAfinesDOM = document.getElementById('mostrarAfinesDOM');
+const h3DOM = document.createElement("h3DOM");
+// Variables de funciones
 let dia = "";
 let mes = "";
 let anio = "";
-let signo = "";
-let numeroDeLaSuerte = "";
+let tuSigno = "";
+let tuNumeroDeLaSuerte = "";
 let numeroMagico = "";
+
 // **ENTREGA 3 **
 function saveBirthdate(){
   dia = document.getElementById('dia').value;
@@ -39,67 +42,82 @@ function saveBirthdate(){
 const cumplePersona1 = new Cumple(dia, mes, anio);
 */
 
+// ** Ejemplo constructor **
+class signoCompatible {
+  constructor (suSigno, suNum) {
+    this.suSigno = suSigno;
+    this.suNum = suNum;
+    }
+};
 // Array con más información de cada signo para poder buscar afines
 const detalleDeLosSignos = [
   { 
     nombre: "Aries", 
-    numeroSuerte: 7 
+    colorSuerte: "amarillo"
   },
   { 
     nombre: "Tauro", 
-    numeroSuerte: 3 
+    colorSuerte: "amarillo"
   },
   { 
     nombre: "Géminis", 
-    numeroSuerte: 5 
+   colorSuerte: "verde"
   },
   { 
     nombre: "Cáncer", 
-    numeroSuerte: 7 
+    colorSuerte: "amarillo"
   },
   { 
     nombre: "Leo", 
-    numeroSuerte: 9 
+    colorSuerte: "azul"
   },
   { 
     nombre: "Virgo", 
-    numeroSuerte: 3 
+    colorSuerte: "blanco" 
   },
   { 
     nombre: "Libra", 
-    numeroSuerte: 8 
+    colorSuerte: "rojo"
   },
   { 
     nombre: "Escorpio",  
-    numeroSuerte: 7 
+    colorSuerte: "blanco" 
   },
   { 
     nombre: "Sagitario", 
-    numeroSuerte: 4 
+    colorSuerte: "verde"
   },
   { 
     nombre: "Capricornio", 
-    numeroSuerte: 3 
+    colorSuerte: "blanco" 
   },
   { 
     nombre: "Acuario", 
-    numeroSuerte: 9 
+    colorSuerte: "verde"
   },
   { 
     nombre: "Piscis", 
-    numeroSuerte: 5 
+    colorSuerte: "rojo"
   }
 ];
 
 
 // Paso 5: **ENTREGA 2 ** Buscamos afines con los métodos find, filter y map
 function filtrarAfines (){
-    const signoEncontrado = detalleDeLosSignos.find(el => el.nombre === signo);
-    const numeroSuerte = signoEncontrado.numeroSuerte;
-    const signosConMismoNumero = detalleDeLosSignos.filter(el => el.numeroSuerte === numeroSuerte);
-    const nombresDeAfines = signosConMismoNumero.map(el => el.nombre);
-    mostrarAfines.style.display = '';
-    afines.innerText = nombresDeAfines;
+    const signoEncontrado = detalleDeLosSignos.find(el => el.nombre === tuSigno);
+    const colorSuerte = signoEncontrado.colorSuerte;
+    const signosConMismoNumero = detalleDeLosSignos.filter(el => el.colorSuerte === colorSuerte);
+    const listadoAfines = signosConMismoNumero.map(el => el);
+    const p = document.createElement("p");
+    p.innerText = `vuestro color de la suerte es ${colorSuerte}`;
+    for ( const afin of listadoAfines) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${afin.nombre}</td>
+      `;
+      mostrarAfinesDOM.append(tr);
+      mostrarAfinesDOM.append(p);
+    }
 }
 
 // Paso 4:  **ENTREGA 2 ** consultamos si quiere buscar afines
@@ -132,33 +150,33 @@ function calcularNumeroMagico(numero) {
 function obtenerSigno(dia, mes) {
   
   if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) {
-    signo = "Acuario";
+    tuSigno = "Acuario";
   } else if ((mes == 2 && dia >= 19) || (mes == 3 && dia <= 20)) {
-    signo = "Piscis";
+    tuSigno = "Piscis";
   } else if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) {
-    signo = "Aries";
+    tuSigno = "Aries";
   } else if ((mes == 4 && dia >= 20) || (mes == 5 && dia <= 20)) {
-    signo = "Tauro";
+    tuSigno = "Tauro";
   } else if ((mes == 5 && dia >= 21) || (mes == 6 && dia <= 20)) {
-    signo = "Géminis";
+    tuSigno = "Géminis";
   } else if ((mes == 6 && dia >= 21) || (mes == 7 && dia <= 22)) {
-    signo = "Cáncer";
+    tuSigno = "Cáncer";
   } else if ((mes == 7 && dia >= 23) || (mes == 8 && dia <= 22)) {
-    signo = "Leo";
+    tuSigno = "Leo";
   } else if ((mes == 8 && dia >= 23) || (mes == 9 && dia <= 22)) {
-    signo = "Virgo";
+    tuSigno = "Virgo";
   } else if ((mes == 9 && dia >= 23) || (mes == 10 && dia <= 22)) {
-    signo = "Libra";
+    tuSigno = "Libra";
   } else if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) {
-    signo = "Escorpio";
+    tuSigno = "Escorpio";
   } else if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) {
-    signo = "Sagitario";
+    tuSigno = "Sagitario";
   } else if ((mes == 12 && dia >= 22) || (mes == 1 && dia <= 19)) {
-    signo = "Capricornio";
+    tuSigno = "Capricornio";
   } else {
-    signo = "Ups parece que perteneces a algo aún desconocido";
+    tuSigno = "Ups parece que perteneces a algo aún desconocido";
   }
-  return signo;
+  return tuSigno;
 }
 
 // Paso 1: Calculamos el signo del zodiaco
@@ -166,10 +184,10 @@ function calcularSignoYMostrar() {
     // Obtenemos los valores o el error
         // Convertimos los valores a números y calculamos el número de la suerte
         numeroDeLaSuerte = Number(dia) + Number(mes) + Number(anio);
-        signo = obtenerSigno(Number(dia), Number(mes)); // Convertimos a número
-        numeroMagico = calcularNumeroMagico(numeroDeLaSuerte); // Ahora pasamos el resultado
+        tuSigno = obtenerSigno(Number(dia), Number(mes)); // Convertimos a número
+        tuNumeroMagico = calcularNumeroMagico(numeroDeLaSuerte); // Ahora pasamos el resultado
         // **ENTREGA 3 **
-        mostrarInfo.style.display = '';
-        tuNum.innerText = numeroMagico;
-        tuSigno.innerText = signo;
+        mostrarInfoDOM.style.display = '';
+        tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
+        tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
 }
