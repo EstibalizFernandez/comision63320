@@ -25,40 +25,36 @@ const anioInput = document.getElementById("anio");
 // Validar el día
 diaInput.addEventListener("change", () => {
     const dia = parseInt(diaInput.value, 10);
-    if (typeof dia === "number" || dia < 1 || dia > 31) {
+    if (dia < 1 || dia > 31) {
         alert("El valor es erróneo");
   }
 });
 // Validar el mes
 mesInput.addEventListener("change", () => {
     const mes = parseInt(mesInput.value, 10);
-    if (typeof mes === "number" || mes < 1 || mes > 12) {
+    if (mes < 1 || mes > 12) {
       alert("El valor es erróneo");
     }
 });
 // Validar el año
 anioInput.addEventListener("change", () => {
     const anio = parseInt(anioInput.value, 10);
-    if (typeof anio === "number" || anio < 1) {
+    if ( anio < 1924 || anio > 2024) {
       alert("El valor es erróneo");
     }
 });
 
 
 // **ENTREGA 3 **
-const saveBirthdate = document.getElementById('saveBirthdate');
-saveBirthdate.addEventListener(
-  "click",
-  () => {
-    dia = document.getElementById('dia').value;
-    mes = document.getElementById('mes').value;
-    anio = document.getElementById('anio').value;
-  
-    if (dia !== "" && mes !== "" && anio !== "") {
-      calcularSignoYMostrar();
-    } else {
-      alert("¡Ups!, parece que ha habido algún error, prueba de nuevo");
-    }
+const birthdateForm = document.getElementById('birthdateForm');
+birthdateForm.addEventListener(
+  "submit",
+  (e) => {
+    e.preventDefault();
+    dia = document.querySelector("input[name='dia']").value;
+    mes = document.querySelector("input[name='mes']").value;
+    anio = document.querySelector("input[name='anio']").value;
+    calcularSignoYMostrar();
   }
 );
 

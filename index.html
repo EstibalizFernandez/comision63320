@@ -7,14 +7,14 @@
 </head>
 <body>
   <h1>Desubre tu signo del zodiaco y tu número mágico</h1>
-  <form id="birthdate-form">
+  <form id="birthdateForm">
     <label for="dia">Día</label>
-    <input type="number" id="dia" name="dia" required>
+    <input type="number" id="dia" name="dia" min="1" max="31" required>
     <label for="mes">Mes</label>
-    <input type="number" id="mes" name="mes" required>
+    <input type="number" id="mes" name="mes" min="1" max="12" required>
     <label for="anio">Año</label>
-    <input type="number" id="anio" name="anio" required>
-    <button type="button" id="saveBirthdate">Guardar</button>
+    <input type="number" id="anio" name="anio" min="1921" max="2024" required>
+    <button type="submit" id="saveBirthdate">Guardar</button>
   </form>
 
 <section id="mostrarInfoDOM" style="display: none;">
