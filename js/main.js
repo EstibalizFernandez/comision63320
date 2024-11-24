@@ -17,6 +17,34 @@ let tuSigno = "";
 let tuNumeroDeLaSuerte = "";
 let numeroMagico = "";
 
+// **ENTREGA 3 ** Revisión del formulario
+
+const diaInput = document.getElementById("dia");
+const mesInput = document.getElementById("mes");
+const anioInput = document.getElementById("anio");
+// Validar el día
+diaInput.addEventListener("change", () => {
+    const dia = parseInt(diaInput.value, 10);
+    if (typeof dia === "number" || dia < 1 || dia > 31) {
+        alert("El valor es erróneo");
+  }
+});
+// Validar el mes
+mesInput.addEventListener("change", () => {
+    const mes = parseInt(mesInput.value, 10);
+    if (typeof mes === "number" || mes < 1 || mes > 12) {
+      alert("El valor es erróneo");
+    }
+});
+// Validar el año
+anioInput.addEventListener("change", () => {
+    const anio = parseInt(anioInput.value, 10);
+    if (typeof anio === "number" || anio < 1) {
+      alert("El valor es erróneo");
+    }
+});
+
+
 // **ENTREGA 3 **
 const saveBirthdate = document.getElementById('saveBirthdate');
 saveBirthdate.addEventListener(
