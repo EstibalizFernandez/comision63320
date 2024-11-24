@@ -18,29 +18,21 @@ let tuNumeroDeLaSuerte = "";
 let numeroMagico = "";
 
 // **ENTREGA 3 **
-function saveBirthdate(){
-  dia = document.getElementById('dia').value;
-  mes = document.getElementById('mes').value;
-  anio = document.getElementById('anio').value;
-
-  if (dia !== "" && mes !== "" && anio !== "") {
-    calcularSignoYMostrar();
-  } else {
-    alert("Ups, parece que ha habido algún error, prueba de nuevo");
-  }
+const saveBirthdate = document.getElementById('saveBirthdate');
+saveBirthdate.addEventListener(
+  "click",
+  () => {
+    dia = document.getElementById('dia').value;
+    mes = document.getElementById('mes').value;
+    anio = document.getElementById('anio').value;
   
-};
-
-// ** Ejemplo constructor **
-/*class Cumple {
-  constructor (dia, mes, anio) {
-    this.dia = dia;
-    this.mes = mes;
-    this.anio = anio;
+    if (dia !== "" && mes !== "" && anio !== "") {
+      calcularSignoYMostrar();
+    } else {
+      alert("¡Ups!, parece que ha habido algún error, prueba de nuevo");
     }
-};
-const cumplePersona1 = new Cumple(dia, mes, anio);
-*/
+  }
+);
 
 // ** Ejemplo constructor **
 class signoCompatible {
@@ -103,13 +95,16 @@ const detalleDeLosSignos = [
 
 
 // Paso 5: **ENTREGA 2 ** Buscamos afines con los métodos find, filter y map
-function filtrarAfines (){
+const filtrarAfines = document.getElementById('filtrarAfines');
+filtrarAfines.addEventListener(
+  "click",
+  () => {
     const signoEncontrado = detalleDeLosSignos.find(el => el.nombre === tuSigno);
     const colorSuerte = signoEncontrado.colorSuerte;
     const signosConMismoNumero = detalleDeLosSignos.filter(el => el.colorSuerte === colorSuerte);
     const listadoAfines = signosConMismoNumero.map(el => el);
     const p = document.createElement("p");
-    p.innerText = `vuestro color de la suerte es ${colorSuerte}`;
+    p.innerText = `vuestro color de la suerte es: ${colorSuerte}`;
     for ( const afin of listadoAfines) {
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -118,7 +113,8 @@ function filtrarAfines (){
       mostrarAfinesDOM.append(tr);
       mostrarAfinesDOM.append(p);
     }
-}
+  }
+);
 
 // Paso 4:  **ENTREGA 2 ** consultamos si quiere buscar afines
 /*function buscarAfines() {

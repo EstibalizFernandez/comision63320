@@ -14,13 +14,13 @@
     <input type="number" id="mes" name="mes" required>
     <label for="anio">Año</label>
     <input type="number" id="anio" name="anio" required>
-    <button type="button" onclick="saveBirthdate()">Guardar</button>
+    <button type="button" id="saveBirthdate">Guardar</button>
   </form>
 
 <section id="mostrarInfoDOM" style="display: none;">
   <h3 id="tuSignoDOM"></h3>
   <h3 id="tuNumDOM"></h3>
-  <button onclick="filtrarAfines()">Ver signos compatibles</button>
+  <button id="filtrarAfines">Ver signos compatibles</button>
 </section>
 
 <section id="mostrarAfinesDOM">
