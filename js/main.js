@@ -22,6 +22,7 @@ let numeroMagico = "";
 const diaInput = document.getElementById("dia");
 const mesInput = document.getElementById("mes");
 const anioInput = document.getElementById("anio");
+const guardadoEnLocal = localStorage.getItem("cumpleanios");
 // Validar el día
 diaInput.addEventListener("change", () => {
     const dia = parseInt(diaInput.value, 10);
@@ -54,6 +55,13 @@ birthdateForm.addEventListener(
     dia = document.querySelector("input[name='dia']").value;
     mes = document.querySelector("input[name='mes']").value;
     anio = document.querySelector("input[name='anio']").value;
+
+    const cumpleanios = {
+      "dia": dia,
+      "mes": mes,
+      "anio": anio
+  };
+  localStorage.setItem("cumpleanios", JSON.stringify(cumpleanios));
     calcularSignoYMostrar();
   }
 );
@@ -117,7 +125,16 @@ const detalleDeLosSignos = [
   }
 ];
 
+// **Entrega 3 Borrar local storage**
 
+const borrarDatos = document.getElementById('borrarDatos');
+borrarDatos.addEventListener(
+  "click",
+  () => {
+    localStorage.removeItem("cumpleanios");
+    location.reload(true);
+  }
+);
 // Paso 5: **ENTREGA 2 ** Buscamos afines con los métodos find, filter y map
 const filtrarAfines = document.getElementById('filtrarAfines');
 filtrarAfines.addEventListener(
@@ -211,3 +228,21 @@ function calcularSignoYMostrar() {
         tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
         tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
 }
+// **ENTREGA 3 **
+function leerLocalStorage() {
+    const datosDeLocal = localStorage.getItem("cumpleanios");
+    if (datosDeLocal) {
+        const datosCumpleanios = JSON.parse(datosDeLocal);
+        dia = datosCumpleanios.dia;
+        mes = datosCumpleanios.mes;
+        anio = datosCumpleanios.anio;
+
+        document.getElementById("dia").value = dia;
+        document.getElementById("mes").value = mes;
+        document.getElementById("anio").value = anio;
+
+        calcularSignoYMostrar();
+    } 
+}
+
+leerLocalStorage();

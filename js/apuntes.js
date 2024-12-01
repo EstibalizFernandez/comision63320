@@ -143,4 +143,34 @@ const fechaLocal = hoy.toLocaleDateString(); // como la anterior pero solo fecha
 const tiempoLocal = hoy.toTimeString(); // como Locale pero solo el tiempo sin la fecha
 
 
+// SESSION y LOCAL STORAGE
+/*
+    Ambos son JSON
+    Si seteas un valor para una clave que ya existe, pisa el valor
+    Los métodos son los mismos para localStorage que para sessionStorage
+    Todos los valores se van a guardar como String, incluídos los arrays, recogerá los valores y los guardará como un único valor separador por comas
+*/
+localStorage.setItem("clave", "valor"); // Para guardar
+localStorage.getItem("clave"); // Para recuperar el valor
+
+
+localStorage.clear(); // Elimina toda la información
+const transformamosEnArray = localStorage.getItem("clave").split(",");
+for (let i = 0; i < localStorage.length; i++) {
+    const recogerLaClave = localStorage.key(i); // Así recuperaríamos todas las claves
+    const recogerElValor = localStorage.getItem(i); // Así recuperaríamos todos los valores
+}
+
+const ejemploJSON = {
+    clave1: "valor1",
+    clave2: "valor2",
+    clave3: "valor3"
+};
+
+// Local Storage. Se almacenan de forma indefinida hasta que eliminemos todos del navegador
+
+// Session Storage. Se almacenan hasta que el usuario cierra el navegador
+
+
+
 
