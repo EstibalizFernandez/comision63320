@@ -171,6 +171,118 @@ const ejemploJSON = {
 
 // Session Storage. Se almacenan hasta que el usuario cierra el navegador
 
+// OPERADORES TERNARIAS
 
+let num = 5;
+num += 10;
+num -= 10;
 
+// OPERADOR LÓGICO &&
+confirmarNum = (num <10) && "es mayor que 10"; // le asigna el valor del && si es verdader o le da valor false
 
+// OPERADOR LÓGICO || FALSY
+// Si es distinto de 0, null, undenfined, NaN... devuleve el operador 1 y sono el 2
+// Ejemplos de Falsy
+console.log( 0 || "Falsy"); 
+console.log( null || "Falsy");
+console.log( undefined || "Falsy");
+console.log( "" || "Falsy");
+console.log( NaN || "Falsy");
+console.log( false || "Falsy");
+// Ejemplos devuelven el primer valor
+console.log( 40 || "Falsy");
+console.log( "hola" || "Falsy");
+console.log( true || "Falsy");
+
+// OPERADOR LÓGICO || NULLISH Como el || pero más acotado
+// Ejemplos de Nullish
+console.log( null ?? "Nullish"); 
+console.log( undefined ?? "Nullish"); 
+console.log( "" ?? "Nullish"); 
+console.log( NaN ?? "Nullish"); 
+// Ejemplos devuelven el primer valor
+console.log( 0 ?? "Nullish"); 
+console.log( 40 ?? "Nullish"); 
+console.log( "hola" ?? "Nullish"); 
+console.log( true ?? "Nullish"); 
+console.log( false ?? "Nullish"); 
+
+// Acceso condicional a objetos. En caso de que no exista, no me devuelvas error
+const persona = {
+    nombre: "x",
+    profesion: {
+        nombre: "x",
+        categoria: "x"
+    }
+};
+console.log(persona.profesion?.nombre) // Consulta si existe la propiedad nombre dentro de prosión del JSON persona. Si no existe trae undefined en vez de explotar
+
+// Desestructurar un JSON con objetos anidados. Tiene una estructura pácticamente igual a la del JSON original
+const { 
+    nombre, 
+    profesion: { 
+        nombre: nombre_profesion, 
+        categoria}
+    } = persona; // crea una variable nombre y otra persona con los valores del JSON anterior
+   // al nombre de la profesion le ponemos un alias porque no puede haber 2 variables con la misma clave 
+   
+   // DESESTRUCTURAR EN UNA FUNCIÓN
+    const desestructurar = ( {nombre, profesion} ) => {
+        console.log(nombre, profesion)
+    };
+
+    desestructurar(persona);
+
+    // DESESTRUCTURACIÓN DE ARRAYS
+    let nombres = ["javier", "ana", "koldo"];
+    let [pers1, pers2, pers3, pers4] = nombres; // La 4 nos devuelve undefined
+    let [, , pers3] = nombres; // Nos va a pintar solo a Koldo, nos salta los que dejemos vacíos
+
+    // OPERADOR SPREAD
+    const nombres2 = ["javier", "ana", "koldo"];
+    console.log(nombres2); // Lo pinta como un Array
+    console.log(...nombres2); // Pasa la info a string
+
+// ejemplo spread con números
+    Math.max(1,2,3,4,5,6);
+    Math.min(1,2,3,4,5,6);
+
+    const numeros2 = [1, 2, 3. 4];
+    // funciona correctamente
+    Math.max(...numeros2);
+    Math.min(...numeros2);
+    // fallaría porque le inserta un array y lo que necesita son parámetros individuales
+    Math.max(numeros2);
+    Math.min(numeros2);
+
+    // también sirve para concatenar arrys
+    const nombres3 = ["javier", "ana", "koldo"];
+    const nombres4 = ["javier", "ana", "koldo"];
+    const concatrenados = nombres3.concat(nombres4);
+    const concatrenados2 = [...nombres3, ...nombres4]; // tú indicas que es array y luego desparramas la info dentro
+
+    // objetos
+    const persona1 = {
+        nombre: "Galder",
+        edad: "22"
+    }
+
+    const persona2 = {
+        nombre: "Galder",
+        edad: "22",
+        ...persona1
+    } // se pisan las propiedades que has puesto en origen
+    const persona3 = {
+        ...persona1,
+        hijo: "Galder",
+        edad_hijo: "22",
+    } // hace añaden las propiedades
+
+// En funciones
+ function imprimirnombres(saludo, ...nombres){ // podemos pasarle infinitos valores
+    console.log(nombres); // imprime un array
+    for (const nombre of nombres) {
+        console.log(`${saludo} ${nombre}`); // saludo se imprime fijo y el resto de forma dinámica en formato string, pueden haber tantos fijos como se quiera, siempre delante del spreed
+    }
+ }
+ imprimirnombres("juana", "josefa", "paca", "lola");

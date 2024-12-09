@@ -17,7 +17,7 @@ let tuSigno = "";
 let tuNumeroDeLaSuerte = "";
 let numeroMagico = "";
 
-// **ENTREGA 3 ** Revisión del formulario
+// ENTREGA 3 Revisión del formulario
 
 const diaInput = document.getElementById("dia");
 const mesInput = document.getElementById("mes");
@@ -26,27 +26,21 @@ const guardadoEnLocal = localStorage.getItem("cumpleanios");
 // Validar el día
 diaInput.addEventListener("change", () => {
     const dia = parseInt(diaInput.value, 10);
-    if (dia < 1 || dia > 31) {
-        alert("El valor es erróneo");
-  }
+    (dia < 1 || dia > 31) ? alert("El valor es erróneo") : console.log(dia); // **Entrega 4 if**
 });
 // Validar el mes
 mesInput.addEventListener("change", () => {
     const mes = parseInt(mesInput.value, 10);
-    if (mes < 1 || mes > 12) {
-      alert("El valor es erróneo");
-    }
+    (mes < 1 || mes > 12) ? alert("El valor es erróneo") : console.log(mes); // **Entrega 4 if**
 });
 // Validar el año
 anioInput.addEventListener("change", () => {
     const anio = parseInt(anioInput.value, 10);
-    if ( anio < 1924 || anio > 2024) {
-      alert("El valor es erróneo");
-    }
+    ( anio < 1924 || anio > 2024) ? alert("El valor es erróneo") : console.log(anio); // **Entrega 4 if**
 });
 
 
-// **ENTREGA 3 **
+// ENTREGA 3 
 const birthdateForm = document.getElementById('birthdateForm');
 birthdateForm.addEventListener(
   "submit",
@@ -66,7 +60,7 @@ birthdateForm.addEventListener(
   }
 );
 
-// ** Ejemplo constructor **
+// Ejemplo constructor 
 class signoCompatible {
   constructor (suSigno, suNum) {
     this.suSigno = suSigno;
@@ -125,7 +119,7 @@ const detalleDeLosSignos = [
   }
 ];
 
-// **Entrega 3 Borrar local storage**
+// Entrega 3 Borrar local storage
 
 const borrarDatos = document.getElementById('borrarDatos');
 borrarDatos.addEventListener(
@@ -135,15 +129,16 @@ borrarDatos.addEventListener(
     location.reload(true);
   }
 );
-// Paso 5: **ENTREGA 2 ** Buscamos afines con los métodos find, filter y map
+// Paso 5: ENTREGA 2 Buscamos afines con los métodos find, filter y map
 const filtrarAfines = document.getElementById('filtrarAfines');
 filtrarAfines.addEventListener(
   "click",
   () => {
     const signoEncontrado = detalleDeLosSignos.find(el => el.nombre === tuSigno);
-    const colorSuerte = signoEncontrado.colorSuerte;
+    const { colorSuerte } = signoEncontrado; // **ENTREGA 4 ** Desestructuración de objetos
     const signosConMismoNumero = detalleDeLosSignos.filter(el => el.colorSuerte === colorSuerte);
     const listadoAfines = signosConMismoNumero.map(el => el);
+    ejemploSpreed(listadoAfines); // **ENTREGA 4 ** spreed
     const p = document.createElement("p");
     p.innerText = `vuestro color de la suerte es: ${colorSuerte}`;
     for ( const afin of listadoAfines) {
@@ -154,8 +149,16 @@ filtrarAfines.addEventListener(
       mostrarAfinesDOM.append(tr);
       mostrarAfinesDOM.append(p);
     }
+  
   }
 );
+
+// **ENTREGA 4 ** spreed
+function ejemploSpreed(...afines) {
+  for ( const afin of afines) {
+    console.log(afin);
+  }
+}
 
 // Paso 4:  **ENTREGA 2 ** consultamos si quiere buscar afines
 /*function buscarAfines() {
@@ -223,25 +226,22 @@ function calcularSignoYMostrar() {
         numeroDeLaSuerte = Number(dia) + Number(mes) + Number(anio);
         tuSigno = obtenerSigno(Number(dia), Number(mes)); // Convertimos a número
         tuNumeroMagico = calcularNumeroMagico(numeroDeLaSuerte); // Ahora pasamos el resultado
-        // **ENTREGA 3 **
+        // ENTREGA 3
         mostrarInfoDOM.style.display = '';
         tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
         tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
 }
-// **ENTREGA 3 **
+//ENTREGA 3
 function leerLocalStorage() {
-    const datosDeLocal = localStorage.getItem("cumpleanios");
+    const datosDeLocal = JSON.parse(localStorage.getItem("cumpleanios"));
     if (datosDeLocal) {
-        const datosCumpleanios = JSON.parse(datosDeLocal);
-        dia = datosCumpleanios.dia;
-        mes = datosCumpleanios.mes;
-        anio = datosCumpleanios.anio;
-
-        document.getElementById("dia").value = dia;
-        document.getElementById("mes").value = mes;
-        document.getElementById("anio").value = anio;
-
-        calcularSignoYMostrar();
+      dia = datosDeLocal.dia;
+      mes = datosDeLocal.mes;
+      anio = datosDeLocal.anio;
+      document.getElementById("dia").value = dia;
+      document.getElementById("mes").value = mes;
+      document.getElementById("anio").value = anio;
+      calcularSignoYMostrar();
     } 
 }
 
