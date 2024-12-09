@@ -119,14 +119,36 @@ const detalleDeLosSignos = [
   }
 ];
 
+// **ENTREGA 4 ** spreed
+function ejemploSpreed(...afines) {
+  for ( const afin of afines) {
+    console.log(afin);
+  }
+}
+// **ENTREGA 4 ** librerías
+function mostrarAlerta(titulo, texto, icono, confirm) {
+  Swal.fire({
+    title: titulo,
+    text: texto,
+    icon: icono,
+    confirmButtonText: confirm
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if ((titulo == "Eliminado") && result.isConfirmed) {
+      location.reload(true);
+    }
+  });
+}
+
 // Entrega 3 Borrar local storage
 
 const borrarDatos = document.getElementById('borrarDatos');
 borrarDatos.addEventListener(
   "click",
   () => {
+    // **Entrega 4** librerías
     localStorage.removeItem("cumpleanios");
-    location.reload(true);
+    mostrarAlerta("Eliminado", `tus datos se han borrado correctamente`, "info" , "OK");
   }
 );
 // Paso 5: ENTREGA 2 Buscamos afines con los métodos find, filter y map
@@ -152,13 +174,6 @@ filtrarAfines.addEventListener(
   
   }
 );
-
-// **ENTREGA 4 ** spreed
-function ejemploSpreed(...afines) {
-  for ( const afin of afines) {
-    console.log(afin);
-  }
-}
 
 // Paso 4:  **ENTREGA 2 ** consultamos si quiere buscar afines
 /*function buscarAfines() {
@@ -230,6 +245,8 @@ function calcularSignoYMostrar() {
         mostrarInfoDOM.style.display = '';
         tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
         tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
+        // **Entrega 4** librerías
+        mostrarAlerta("Enhorabuena", `ya sabemos tu número mágico: ${tuNumeroMagico}`, "success" , "Genial");
 }
 //ENTREGA 3
 function leerLocalStorage() {
