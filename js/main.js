@@ -140,6 +140,16 @@ function mostrarAlerta(titulo, texto, icono, confirm) {
   });
 }
 
+function mostrarToast(text, position){
+  Toastify({
+    text: text,
+    duration: 3000,
+    position: position,
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+    }).showToast();
+}
 // Entrega 3 Borrar local storage
 
 const borrarDatos = document.getElementById('borrarDatos');
@@ -171,7 +181,7 @@ filtrarAfines.addEventListener(
       mostrarAfinesDOM.append(tr);
       mostrarAfinesDOM.append(p);
     }
-  
+    mostrarToast("Afinidad total!", "right");  // **Entrega 4** librerías
   }
 );
 
@@ -247,6 +257,7 @@ function calcularSignoYMostrar() {
         tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
         // **Entrega 4** librerías
         mostrarAlerta("Enhorabuena", `ya sabemos tu número mágico: ${tuNumeroMagico}`, "success" , "Genial");
+        mostrarToast("Tu signo es el mejor ;)", "left");
 }
 //ENTREGA 3
 function leerLocalStorage() {
