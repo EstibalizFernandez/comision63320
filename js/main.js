@@ -16,9 +16,12 @@ let anio = "";
 let tuSigno = "";
 let tuNumeroDeLaSuerte = "";
 let numeroMagico = "";
+
+// **Entrega 4 librerías**
 var DateTime = luxon.DateTime;
 const fecha = DateTime.now().toFormat('MMMM dd, yyyy');
 document.getElementById("fecha").innerText  = fecha;
+
 // ENTREGA 3 Revisión del formulario
 
 const diaInput = document.getElementById("dia");
@@ -127,6 +130,7 @@ function ejemploSpreed(...afines) {
     console.log(afin);
   }
 }
+
 // **ENTREGA 4 ** librerías
 function mostrarAlerta(titulo, texto, icono, confirm) {
   Swal.fire({
@@ -145,7 +149,7 @@ function mostrarAlerta(titulo, texto, icono, confirm) {
 function mostrarToast(text, position){
   Toastify({
     text: text,
-    duration: 3000,
+    duration: 1500,
     position: position,
     style: {
       background: "linear-gradient(to right, #00b09b, #96c93d)",
