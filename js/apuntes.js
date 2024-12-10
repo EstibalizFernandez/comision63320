@@ -286,3 +286,40 @@ const {
     }
  }
  imprimirnombres("juana", "josefa", "paca", "lola");
+
+ // ASINCRONÍA
+ // timeout, función que recibe 2 parámetros, una función y un tiempo
+ setTimeout( () => {
+    console.log("espera 3 segundos");
+ }, 3000);
+
+ // setInterval, ejecuta constantemente cada los milisegundos que le indiques
+ setInterval( () => {
+    console.log("espera 3 segundos");
+ }, 3000);
+
+// Limpiar setInterval o setTimeout
+clearTimeout(x); // Le tenemos que pasar lo que queremos limpiar
+clearInterval(y);// Le tenemos que pasar lo que queremos limpiar
+
+
+ // para forzar un punto de ruptura
+ debugger; // añadimos esto en la línea de código, función... que queremos parar
+
+ // PROMESAS
+ // tiene 2 funciones, la primera es OK y la segunda KO que podemos utilizar cuando necesitemos
+ const numero = 5;
+ const promesa = new Promise ((resolve, reject) => {
+    if (numero === 5) {
+        resolve(numero++);
+    } else {
+        reject(numero--);
+    }
+ });
+
+ // tienen 2 métodos disponibles, then() y catch(), para que ejecute cuando sea OK o KO
+ promesa
+    .then( (numeroNuevo) => {console.log("fue OK, puedo recibir parámetros", numeroNuevo) })
+    .catch((nuevoNumero) => {console.log("fue KO, puedo recibir parámetros", nuevoNumero) })
+    .finally( () => { console.log("terminó OK o KO pero no puede recibir parámetros"); });
+ 

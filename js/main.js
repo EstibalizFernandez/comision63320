@@ -164,6 +164,7 @@ borrarDatos.addEventListener(
   () => {
     // **Entrega 4** librerías
     localStorage.removeItem("cumpleanios");
+    
     mostrarAlerta("Eliminado", `tus datos se han borrado correctamente`, "info" , "OK");
   }
 );
@@ -257,26 +258,33 @@ function calcularSignoYMostrar() {
         numeroDeLaSuerte = Number(dia) + Number(mes) + Number(anio);
         tuSigno = obtenerSigno(Number(dia), Number(mes)); // Convertimos a número
         tuNumeroMagico = calcularNumeroMagico(numeroDeLaSuerte); // Ahora pasamos el resultado
+        // **Entrega 4** librerías y asincrpnía
+        setTimeout( () => {
+          mostrarAlerta("Enhorabuena", `ya sabemos tu número mágico: ${tuNumeroMagico}`, "success" , "Genial");
+           mostrarToast("Tu signo es el mejor ;)", "left");
+       }, 0);
         // ENTREGA 3
         mostrarInfoDOM.style.display = '';
         tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
         tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
-        // **Entrega 4** librerías
-        mostrarAlerta("Enhorabuena", `ya sabemos tu número mágico: ${tuNumeroMagico}`, "success" , "Genial");
-        mostrarToast("Tu signo es el mejor ;)", "left");
 }
-//ENTREGA 3
+//**ENTREGA 4 PROMESAS
 function leerLocalStorage() {
-    const datosDeLocal = JSON.parse(localStorage.getItem("cumpleanios"));
-    if (datosDeLocal) {
-      dia = datosDeLocal.dia;
-      mes = datosDeLocal.mes;
-      anio = datosDeLocal.anio;
-      document.getElementById("dia").value = dia;
-      document.getElementById("mes").value = mes;
-      document.getElementById("anio").value = anio;
-      calcularSignoYMostrar();
-    } 
+    const promesa = new Promise( (ok, ko) => {
+      const datosDeLocal = JSON.parse(localStorage.getItem("cumpleanios"));
+      datosDeLocal ? ok(datosDeLocal) : ko("localStorge vacío");
+    });
+    promesa
+      .then( (datosDeLocal) => {
+        dia = datosDeLocal.dia;
+        mes = datosDeLocal.mes;
+        anio = datosDeLocal.anio;
+        document.getElementById("dia").value = dia;
+        document.getElementById("mes").value = mes;
+        document.getElementById("anio").value = anio;
+        calcularSignoYMostrar();
+      })
+    .catch((nota) => {console.log(nota);})
 }
 
 leerLocalStorage();
