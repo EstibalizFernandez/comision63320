@@ -16,7 +16,9 @@ let anio = "";
 let tuSigno = "";
 let tuNumeroDeLaSuerte = "";
 let numeroMagico = "";
-
+var DateTime = luxon.DateTime;
+const fecha = DateTime.now().toFormat('MMMM dd, yyyy');
+document.getElementById("fecha").innerText  = fecha;
 // ENTREGA 3 Revisión del formulario
 
 const diaInput = document.getElementById("dia");
