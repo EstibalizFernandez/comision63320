@@ -267,6 +267,7 @@ function calcularSignoYMostrar() {
         mostrarInfoDOM.style.display = '';
         tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
         tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
+        verSuperPoder();
 }
 //**ENTREGA 4 PROMESAS
 function leerLocalStorage() {
@@ -284,7 +285,23 @@ function leerLocalStorage() {
         document.getElementById("anio").value = anio;
         calcularSignoYMostrar();
       })
-    .catch((nota) => {console.log(nota);})
+    .catch((nota) => {console.log(nota);});
+}
+
+// ** ENTREGA 4 GET desde API
+function verSuperPoder (json) {
+  const peticionAPI = fetch ("https://api.chucknorris.io/jokes/random");
+  peticionAPI
+  .then ( (response) => {
+    return response.json();
+  }).then( (json) => {
+    console.log(json);
+    const superpoder = document.getElementById("superpoder");
+    superpoder.innerHTML += `<div>Tu chiste para enamorar hoy es: ${json.value}</div>`;
+  })
+  .catch ( () => {
+    mostrarToast("Hubo un error", "left");
+  });
 }
 
 leerLocalStorage();
