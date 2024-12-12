@@ -327,3 +327,20 @@ clearInterval(y);// Le tenemos que pasar lo que queremos limpiar
 // ASYNC - AWAIT
 // solo se puede ejectuar en funciones
 // hace que las promesas se resuelvan de forma síncrina, bloquea
+// ** ENTREGA 4 GET desde API con ASYNC y AWAIT
+async function verChisteDeHoy () {
+    const peticionAPI = await fetch ("https://api.chucknorris.io/jokes/random");
+      const json = await peticionAPI.json();
+      chiste.innerHTML += ``;
+      chiste.innerHTML += `<div>${json.value}</div>`;
+      guardarChiste(json);
+  }
+
+// ejemplo FETCH
+fetch("/datos.json")
+.then ( (response) =>{
+  return response.json();
+})
+  .then ((json) => {
+    console.log(json);
+  })

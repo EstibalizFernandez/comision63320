@@ -164,7 +164,6 @@ borrarDatos.addEventListener(
   () => {
     // **Entrega 4** librerías
     localStorage.removeItem("cumpleanios");
-    
     mostrarAlerta("Eliminado", `tus datos se han borrado correctamente`, "info" , "OK");
   }
 );
@@ -173,21 +172,23 @@ const filtrarAfines = document.getElementById('filtrarAfines');
 filtrarAfines.addEventListener(
   "click",
   () => {
+    document.getElementById("mostrarAfinesDOM").innerHTML = "";
     const signoEncontrado = detalleDeLosSignos.find(el => el.nombre === tuSigno);
     const { colorSuerte } = signoEncontrado; // **ENTREGA 4 ** Desestructuración de objetos
     const signosConMismoNumero = detalleDeLosSignos.filter(el => el.colorSuerte === colorSuerte);
     const listadoAfines = signosConMismoNumero.map(el => el);
     ejemploSpreed(listadoAfines); // **ENTREGA 4 ** spreed
-    const p = document.createElement("p");
-    p.innerText = `vuestro color de la suerte es: ${colorSuerte}`;
+    mostrarAfinesDOM.innerHTML += ``;
     for ( const afin of listadoAfines) {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${afin.nombre}</td>
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <li class="list-group-item">${afin.nombre}</li>
       `;
-      mostrarAfinesDOM.append(tr);
-      mostrarAfinesDOM.append(p);
+      mostrarAfinesDOM.append(li);
     }
+    const liColor = document.createElement("li");
+    liColor.innerHTML = ` <li class="list-group-item">vuestro color de la suerte es: ${colorSuerte}</li> `;
+    mostrarAfinesDOM.append(liColor);
     mostrarToast("Afinidad total!", "right");  // **Entrega 4** librerías
   }
 );
@@ -265,8 +266,9 @@ function calcularSignoYMostrar() {
        }, 0);
         // ENTREGA 3
         mostrarInfoDOM.style.display = '';
-        tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
-        tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
+        mostrarAfinesDOM.innerHTML += ``;
+        tuNumDOM.innerText = `${tuNumeroMagico}`;
+        tuSignoDOM.innerText = `${tuSigno}`;
         verChisteDeHoy();
 }
 //**ENTREGA 4 PROMESAS
@@ -288,14 +290,15 @@ function leerLocalStorage() {
     .catch((nota) => {console.log(nota);});
 }
 
-// ** ENTREGA 4 GET desde API
+// ** ENTREGA 4 GET desde API con ASYNC y AWAIT
 async function verChisteDeHoy () {
   const peticionAPI = await fetch ("https://api.chucknorris.io/jokes/random");
     const json = await peticionAPI.json();
-    chiste.innerHTML += `<div>Tu chiste para enamorar hoy es: ${json.value}</div>`;
+    chiste.innerHTML += ``;
+    chiste.innerHTML += `<div>${json.value}</div>`;
     guardarChiste(json);
 }
-// ** ENTREGA 4 POST a API
+// ** ENTREGA 4 POST a API con promesas
 function guardarChiste(json) {
   fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
@@ -310,4 +313,7 @@ function guardarChiste(json) {
      console.log("ESTE ES EL CHISTE GUARDADO", json);
     })
   };
+
+
+  
 leerLocalStorage();
