@@ -267,7 +267,7 @@ function calcularSignoYMostrar() {
         mostrarInfoDOM.style.display = '';
         tuNumDOM.innerText = `Tu número mágico es: ${tuNumeroMagico}`;
         tuSignoDOM.innerText = `Tu signo del zodiaco es: ${tuSigno}`;
-        verSuperPoder();
+        verChisteDeHoy();
 }
 //**ENTREGA 4 PROMESAS
 function leerLocalStorage() {
@@ -289,19 +289,29 @@ function leerLocalStorage() {
 }
 
 // ** ENTREGA 4 GET desde API
-function verSuperPoder (json) {
+function verChisteDeHoy () {
   const peticionAPI = fetch ("https://api.chucknorris.io/jokes/random");
   peticionAPI
   .then ( (response) => {
     return response.json();
   }).then( (json) => {
-    console.log(json);
-    const superpoder = document.getElementById("superpoder");
-    superpoder.innerHTML += `<div>Tu chiste para enamorar hoy es: ${json.value}</div>`;
+    chiste.innerHTML += `<div>Tu chiste para enamorar hoy es: ${json.value}</div>`;
+    guardarChiste(json);
   })
-  .catch ( () => {
-    mostrarToast("Hubo un error", "left");
-  });
 }
 
+function guardarChiste(json) {
+  fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify(json),
+    headers: {
+      "Content-type":"application/json; charset=UTF-8",
+    },
+  })
+  .then ((response) => {
+      return response.json();
+    }) .then((json) => {
+      console.log("CHISTE GUARDADO", json);
+    })
+  };
 leerLocalStorage();
