@@ -323,3 +323,7 @@ clearInterval(y);// Le tenemos que pasar lo que queremos limpiar
     .catch((nuevoNumero) => {console.log("fue KO, puedo recibir parámetros", nuevoNumero) })
     .finally( () => { console.log("terminó OK o KO pero no puede recibir parámetros"); });
  
+    
+// ASYNC - AWAIT
+// solo se puede ejectuar en funciones
+// hace que las promesas se resuelvan de forma síncrina, bloquea

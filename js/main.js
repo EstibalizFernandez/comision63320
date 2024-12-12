@@ -289,17 +289,13 @@ function leerLocalStorage() {
 }
 
 // ** ENTREGA 4 GET desde API
-function verChisteDeHoy () {
-  const peticionAPI = fetch ("https://api.chucknorris.io/jokes/random");
-  peticionAPI
-  .then ( (response) => {
-    return response.json();
-  }).then( (json) => {
+async function verChisteDeHoy () {
+  const peticionAPI = await fetch ("https://api.chucknorris.io/jokes/random");
+    const json = await peticionAPI.json();
     chiste.innerHTML += `<div>Tu chiste para enamorar hoy es: ${json.value}</div>`;
     guardarChiste(json);
-  })
 }
-
+// ** ENTREGA 4 POST a API
 function guardarChiste(json) {
   fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
@@ -311,7 +307,7 @@ function guardarChiste(json) {
   .then ((response) => {
       return response.json();
     }) .then((json) => {
-      console.log("CHISTE GUARDADO", json);
+     console.log("ESTE ES EL CHISTE GUARDADO", json);
     })
   };
 leerLocalStorage();
